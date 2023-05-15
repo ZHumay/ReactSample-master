@@ -10,6 +10,7 @@ function SupplierForm() {
     let navigate=useNavigate()
 
     const SubmiteClick = (values) => {
+
         axios.post("https://northwind.vercel.app/api/suppliers",values)
         .then(res=>{
            navigate("/")
@@ -52,7 +53,7 @@ function SupplierForm() {
       </Form.Item>
       <Form.Item
         label="City"
-        name="city"
+        name={['address', 'city']}
         rules={[{ required: true, message: 'Please input city!' }]}
       >
         <Input />
