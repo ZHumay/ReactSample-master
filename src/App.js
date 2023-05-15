@@ -15,6 +15,9 @@ import {  Routes, Route } from "react-router-dom";
 import Users from './components/Pages/Users';
 import HomePage from './components/Pages/HomePage';
 import UsersPost from './components/Pages/UsersPost';
+import AntdTable from './components/Antd/AntdTable';
+import SupplierForm from './components/Antd/SupplierForm';
+import AntdPage from './components/Antd/AntdPage';
 function App() {
   return (
     <>
@@ -29,12 +32,16 @@ function App() {
    {/* <Sample8/> */}
    {/* <Sample9/> */}
    {/* <Sample10/> */}
-   <Routes>
+   {/* <Routes>
        
           <Route path="/" element={<HomePage />} />
           <Route path="/users" element={<Users/>} />
           <Route path="/UsersPost/:id" element={<UsersPost/>} />
       
+      </Routes> */}
+      <Routes>
+      <Route path="/" element={<AntdPage/>}/>
+<Route path="/add" element={<SupplierForm/>}/>
       </Routes>
 
     </>

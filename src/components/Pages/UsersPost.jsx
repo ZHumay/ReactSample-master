@@ -13,26 +13,40 @@ function UsersPost() {
    const [editid, seteditid] = useState('');
    const [editbody, seteditbody] = useState(0);
    const [edittitle, setedittitle] = useState(0)
-
+const[edituserid,setedituserid]=useState(0)
     const {id}=useParams()
 
+    const loadData = () => {
+        axios.get(`https://jsonplaceholder.typicode.com/users/${id}/posts`)
+        .then(res=>setData(res.data))
+    }
+
+    useEffect(() => {
+        loadData();
+    }, [])
 
     const removeProduct = (id) => {
-        let filtereddata = data.filter(q => q.id != id);
-        setData(filtereddata)
+        axios.delete(`https://jsonplaceholder.typicode.com/users/${id}/posts`)
+           
     }
 
     const editdata = (item) => {
-        seteditid(item.name);
-        seteditbody(item.unitPrice)
-        setedittitle(item.id)
+        seteditid(item.id);
+        seteditbody(item.body)
+        setedittitle(item.title)
+        setedituserid(item.userId)
+
+        let data =data.find(q => q.id == edituserid);
+        data.id = editid;
+        data.body = editbody; 
+        data.title=edittitle
+        setData([...data])
+
     }
 
+   
 
-useEffect(()=>{
-axios.get(`https://jsonplaceholder.typicode.com/users/${id}/posts`)
-.then(res=>setData(res.data))
-},[])
+
    console.log(id);
   return (
 <Layout>
@@ -58,7 +72,6 @@ axios.get(`https://jsonplaceholder.typicode.com/users/${id}/posts`)
                     <td>{item.title}</td>
                     <td><button style={{color:"red"}} onClick={() => removeProduct(item.id)}>Delete </button></td>
                     <td><button style={{color:"green"}} onClick={() => editdata(item)}>Edit</button></td>
-               
                   </tr>)
                 )
               )}
