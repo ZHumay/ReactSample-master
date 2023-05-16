@@ -30,18 +30,12 @@ function SupplierForm() {
     }
   };
 
-  const SubmiteClick = (values) => {
-    axios.post("https://northwind.vercel.app/api/categories", values)
-      .then(res => {
-        navigate("/");
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  const [form] = Form.useForm();
-
+    const SubmiteClick = (values) => {
+        axios.post("https://northwind.vercel.app/api/suppliers",values)
+        .then(res=>{
+           navigate("/")
+        })
+       };
   return (
     <>
       <Form
@@ -71,25 +65,20 @@ function SupplierForm() {
           <Input />
         </Form.Item>
 
-        <Form.Item
-          label="Name"
-          name="name"
-          rules={[{ required: true, message: 'Please input name!' }]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item name="description" label="description" rules={[{ required: true }]}>
-          <Select
-            placeholder="Select a option and change input text above"
-            onChange={onGenderChange}
-            allowClear
-          >
-            {descriptions.map(item => (
-              <Option key={item.id} value={item.description}>{item.description}</Option>
-            ))}
-          </Select>
-        </Form.Item>
+      <Form.Item
+        label="ContactName"
+        name="contactName"
+        rules={[{ required: true, message: 'Please input Contactname!' }]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        label="City"
+        name="city"
+        rules={[{ required: true, message: 'Please input city!' }]}
+      >
+        <Input />
+      </Form.Item>
 
         <Form.Item wrapperCol={{
           offset: 8,
@@ -104,4 +93,4 @@ function SupplierForm() {
   );
 }
 
-export default SupplierForm;
+export default SupplierForm
