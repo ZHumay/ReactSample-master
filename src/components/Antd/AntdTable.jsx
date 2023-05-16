@@ -2,12 +2,13 @@ import { Button,Modal, Table } from 'antd';
 import axios from 'axios';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react'
+import SupplierForm from './SupplierForm';
 
 const { confirm } = Modal;
 
 
 function AntdTable() {
-    const[suppliers,setSuppliers]=useState([])
+    const[categories,setcategories]=useState([])
 // const[loading,setloading]=useState(true)
 
 useEffect(()=>{
@@ -15,21 +16,22 @@ useEffect(()=>{
   },[])
 
 const loadData=()=>{
-    axios.get("https://northwind.vercel.app/api/suppliers")
-    .then(res=>{
-        setSuppliers(res.data)})
-        // setloading(false)
+    axios.get("https://northwind.vercel.app/api/categories")
+    .then((res)=>{
+   
+        setcategories(res.data)});
+  
 }
 
 
-  const deleteSupplier = (id) => {
+  const deletecategories = (id) => {
   confirm({
       title: 'Do you Want to delete these items?',
       icon: <ExclamationCircleFilled />,
       content: 'Delete',
       onOk() {
         // setloading(true);
-        axios.delete('https://northwind.vercel.app/api/suppliers/' + id)
+        axios.delete('https://northwind.vercel.app/api/categories/' + id)
           .then(data => {
             loadData();
           })
@@ -49,36 +51,31 @@ const loadData=()=>{
       key: 'id',
     },
     {
-      title: 'companyName',
-      dataIndex: 'companyName',
-      key: 'companyName',
-      sorter: (a,b) => a.companyName.localeCompare(b.companyName)
+      title: 'description',
+      dataIndex: 'description',
+      key: 'description',
+      sorter: (a,b) => a.description.localeCompare(b.description)
     },
     {
-      title: 'contactName',
-      dataIndex: 'contactName',
-      key: 'contactName',
-      sorter: (c,d) => c.contactName.localeCompare(d.contactName)
+      title: 'name',
+      dataIndex: 'name',
+      key: 'name',
+      sorter: (c,d) => c.name.localeCompare(d.name)
 
     },
-    {
-        title: 'City',
-        dataIndex: 'City',
-        render: (_,item)=>item.address?.city,
-        key: 'City',
-      },
+  
       {
         title:"Delete",
         dataIndex: "id",
         key:"id",
-        render:(id)=><Button onClick={()=>deleteSupplier(id)} type='primary' danger>Delete</Button>
+        render:(id)=><Button onClick={()=>deletecategories(id)} type='primary' danger>Delete</Button>
       }
     ]
 
   return (
     <>
 <Table 
- dataSource={suppliers}
+ dataSource={categories}
  columns={columns}
 //  loading={loading}
  pagination={
