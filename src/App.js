@@ -13,12 +13,20 @@ import Sample9 from './components/Sample9';
 import {  Routes, Route } from "react-router-dom";
 
 import Users from './components/Pages/Users';
-import HomePage from './components/Pages/HomePage';
+// import HomePage from './components/Pages/HomePage';
 import UsersPost from './components/Pages/UsersPost';
 import AntdTable from './components/Antd/AntdTable';
 import SupplierForm from './components/Antd/SupplierForm';
 import AntdPage from './components/Antd/AntdPage';
+import Login from './components/ContextExample/Login';
+import Profile from './components/ContextExample/Profile';
+import HomePage from './components/ContextExample/HomePage';
+import { LoginContext } from './components/ContextExample/Context';
+import { useState } from 'react';
+import FormikSample from './components/Antd/FormikSample';
 function App() {
+
+  const[loggedIn,setLoggedIn]=useState(false)
   return (
     <>
     {/* <Sample1/> */}
@@ -39,10 +47,23 @@ function App() {
           <Route path="/UsersPost/:id" element={<UsersPost/>} />
       
       </Routes> */}
-      <Routes>
+      {/* {<Routes>
       <Route path="/" element={<AntdPage/>}/>
 <Route path="/add" element={<SupplierForm/>}/>
-      </Routes>
+      </Routes> } */}
+
+{<Routes>
+      <Route path="/" element={<AntdPage/>}/>
+<Route path="/add" element={<FormikSample/>}/>
+      </Routes> }
+      {/* <div style={{display:'flex',justifyContent:"center",flexDirection:"column"}}>
+  <LoginContext.Provider value={{loggedIn,setLoggedIn}}>
+  <HomePage/>
+ <Login/>
+ <Profile/>
+  </LoginContext.Provider>
+
+</div> */}
 
     </>
   );
